@@ -15,6 +15,10 @@ app.set("view engine", "ejs");
 
 app.use("/", mainRouter);
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  "/public/images",
+  express.static(path.join(__dirname, "public", "images"))
+);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
