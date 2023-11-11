@@ -85,8 +85,8 @@ html {
   }
   
   .card-button {
-    background: rgba(112,9,121,1); /* Button background */
-    color: white; /* Button text color */
+    background: rgba(112,9,121,1);
+    color: white;
     border: none;
     padding: 10px 20px;
     margin: 10px 0;
@@ -96,14 +96,13 @@ html {
   }
   
   .card-button:hover {
-    background: rgba(0,212,255,1); /* Button hover background */
+    background: rgba(0,212,255,1);
   }
-  
-  /* Add this if you want to set a specific height to the image and make it editable in CSS */
+
   .card {
     background-size: cover;
     background-position: center;
-    height: 650px; /* Adjust height as needed */
+    height: 650px;
     margin-top: 2%;
   }
   
