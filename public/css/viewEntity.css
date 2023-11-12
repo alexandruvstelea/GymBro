@@ -1,0 +1,211 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: azure;
+  height: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-radius: 15px 15px 15px 15px;
+  margin-top: 1%;
+  margin-left: 10%;
+  margin-right: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.navbar:hover {
+  transform: scale(1.05);
+}
+
+.navbar a {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.navbar a.logo {
+  background-color: transparent;
+  margin-right: auto;
+}
+
+.navbar a:not(.logo):hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar a.active {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+
+.navbar-right {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.categories-title {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.categories {
+  width: 20%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 75%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0px 35px 35px 0px;
+}
+
+.category,
+.admin-button {
+  display: block;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  margin: 5px 0; /* Space between buttons */
+  transition: transform 0.3s ease; /* Smooth transition for hover */
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+.category {
+  border: 2px solid transparent; /* Transparent border initially */
+  box-shadow: 0px 0px 4px black; /* Initial subtle shadow */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform effects */
+  font-size: 36px;
+}
+
+.admin-button {
+  border: 2px solid rgba(112, 9, 121, 0.5);
+  box-shadow: 0px 0px 4px black;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-size: 24px;
+}
+
+.category:hover {
+  border-color: rgba(255, 255, 255, 0.3); /* Slight change in border color */
+  transition: background-color 0.3s ease;
+  transform: scale(1.1);
+}
+
+.admin-button:hover {
+  transition: background-color 0.3s ease;
+  transform: scale(1.05);
+}
+
+.main-content {
+  width: 80%;
+  padding: 20px;
+}
+
+.entity-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-y: auto; /* Add this line to enable vertical scrolling */
+  max-height: 77vh;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.card {
+  background-color: white;
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-content h3,
+.card-content p {
+  margin: 10px 0;
+}
+
+.card-button {
+  background: rgba(112, 9, 121, 1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.card-button:hover {
+  background: rgba(0, 212, 255, 1);
+}
+
+.card {
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  margin-top: 2%;
+}
+
+.footer {
+  color: black;
+  text-align: center;
+  font-weight: bolder;
+  position: fixed;
+  bottom: 0;
+  width: 80%;
+}

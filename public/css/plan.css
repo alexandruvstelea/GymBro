@@ -4,7 +4,6 @@ html {
   padding: 0;
   font-family: "Montserrat", sans-serif;
   background-color: azure;
-  height: 100%;
 }
 
 .navbar {
@@ -20,8 +19,8 @@ html {
   );
   border-radius: 15px 15px 15px 15px;
   margin-top: 1%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 15%;
+  margin-right: 15%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
@@ -58,80 +57,94 @@ html {
   display: flex;
 }
 
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
-.categories-title {
-  color: white;
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-decoration: underline;
-}
-
-.categories {
-  width: 20%;
+.footer {
   background: rgb(2, 0, 36);
   background: linear-gradient(
-    180deg,
+    45deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(112, 9, 121, 1) 75%,
+    rgba(112, 9, 121, 1) 45%,
     rgba(0, 212, 255, 1) 100%
   );
-  padding: 10px;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bolder;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.left-column,
+.right-column {
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  border-radius: 0px 35px 35px 0px;
+  justify-content: start;
+  height: 100%;
 }
 
-.category,
-.admin-button {
-  display: block;
-  padding: 10px;
-  color: white;
-  font-weight: bold;
-  margin: 5px 0; /* Space between buttons */
-  transition: transform 0.3s ease; /* Smooth transition for hover */
-  color: white;
-  padding: 10px 20px;
-  margin: 10px 0;
-  border-radius: 10px;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  text-decoration: none;
+.left-column h2 {
+  color: #800080;
+  font-size: 28px;
+  margin-bottom: 10px;
 }
-.category {
-  border: 2px solid transparent; /* Transparent border initially */
-  box-shadow: 2px 2px 4px black; /* Initial subtle shadow */
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform effects */
+
+.left-column p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  padding: 36px;
+  margin-bottom: 0;
+}
+
+.card-stats {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  height: 150px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-stats:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-stats h2 {
+  margin: 0;
+  padding-bottom: 10px;
   font-size: 36px;
 }
 
-.admin-button {
-  border: 2px solid rgba(112, 9, 121, 0.5);
-  box-shadow: 2px 2px 4px black;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+.card-stats p {
+  text-align: center;
   font-size: 24px;
 }
 
-.category:hover {
-  border-color: rgba(255, 255, 255, 0.3); /* Slight change in border color */
-  transition: background-color 0.3s ease;
-  transform: scale(1.1);
+.difficulty {
+  background-color: #8a2be2;
+  color: black;
 }
 
-.admin-button:hover {
-  transition: background-color 0.3s ease;
-  transform: scale(1.05);
+.duration {
+  background-color: #00ced1;
 }
 
-.main-content {
-  width: 80%;
-  padding: 20px;
+.category {
+  background-color: #ff8c00;
 }
 
 .entity-title {
@@ -141,21 +154,22 @@ html {
   text-align: center;
 }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  overflow-y: auto; /* Add this line to enable vertical scrolling */
-  max-height: 77vh;
+h2 {
+  text-align: center;
 }
 
-.footer {
-  color: black;
-  text-align: center;
-  font-weight: bolder;
-  position: fixed;
-  bottom: 0;
-  width: 80%;
+.column-explanation {
+  font-size: 14px;
+  color: #666;
+  padding-bottom: 20px;
+  margin-bottom: auto;
+}
+
+.horizontal-cards-section {
+  display: flex;
+  overflow-x: auto;
+  padding-top: 20px;
+  max-width: 100%;
 }
 
 .card-container {
@@ -166,7 +180,7 @@ html {
 
 .card {
   background-color: white;
-  width: 200px;
+  width: 150px;
   margin: 10px;
   text-align: center;
   border-radius: 10px;
@@ -174,6 +188,8 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  flex: 0 0 auto;
+  margin-right: 10px;
 }
 
 .card:hover {
@@ -181,21 +197,18 @@ html {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card-content {
-  padding: 20px;
-}
-
 .card-content h3,
 .card-content p {
-  margin: 10px 0;
+  margin: 5px 0 0 0;
+  padding: 5px;
 }
 
 .card-button {
   background: rgba(112, 9, 121, 1);
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin: 10px 0;
+  padding: 5px;
+  margin-top: 5px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
   font-weight: bold;

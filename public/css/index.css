@@ -1,119 +1,145 @@
 body,
 html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color:azure;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: azure;
 }
 
 .navbar {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(112, 9, 121, 1) 45%, rgba(0, 212, 255, 1) 100%);
-    border-radius: 15px 15px 15px 15px;
-    margin-top: 1%;
-    margin-left: 15%;
-    margin-right: 15%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-radius: 15px 15px 15px 15px;
+  margin-top: 1%;
+  margin-left: 15%;
+  margin-right: 15%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
 .navbar:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .navbar a {
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
-    text-decoration: none;
-    padding: 10px 15px;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
 .navbar a.logo {
-    background-color: transparent;
-    margin-right: auto;
+  background-color: transparent;
+  margin-right: auto;
 }
 
 .navbar a:not(.logo):hover {
-    background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .navbar a.active {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #000;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
 }
 
 .navbar-right {
-    display: flex;
+  display: flex;
 }
 
 .card-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px;
-  }
-  
-  .card {
-    background-color: white;
-    width: 500px;
-    margin: 10px;
-    text-align: center;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  }
-  
-  .card-content {
-    padding: 20px;
-  }
-  
-  .card-content h3,
-  .card-content p {
-    margin: 10px 0;
-  }
-  
-  .card-button {
-    background: rgba(112,9,121,1);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-  }
-  
-  .card-button:hover {
-    background: rgba(0,212,255,1);
-  }
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
 
-  .card {
-    background-size: cover;
-    background-position: center;
-    height: 650px;
-    margin-top: 2%;
-  }
-  
+.card {
+  background-color: white;
+  width: 500px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3,
+.card-content p {
+  margin: 10px 0;
+}
+
+.card-button {
+  background: rgba(112, 9, 121, 1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.card-button:hover {
+  background: rgba(0, 212, 255, 1);
+}
+
+.card {
+  background-size: cover;
+  background-position: center;
+  height: 650px;
+  margin-top: 2%;
+  color: black;
+}
+
+.item-count {
+  padding: 10px;
+  font-weight: bold;
+  color: rgba(112, 9, 121, 1);
+  margin-top: 10px;
+}
+
 .footer {
-    background: rgb(2, 0, 36);
-    background: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(112, 9, 121, 1) 45%, rgba(0, 212, 255, 1) 100%);
-    color: white;
-    padding: 5px;
-    text-align: center;
-    font-weight: bolder;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bolder;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.entity-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 15px 0 15px;
+  text-align: center;
 }

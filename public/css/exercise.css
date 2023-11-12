@@ -1,0 +1,166 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: azure;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-radius: 15px 15px 15px 15px;
+  margin-top: 1%;
+  margin-left: 15%;
+  margin-right: 15%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.navbar:hover {
+  transform: scale(1.05);
+}
+
+.navbar a {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.navbar a.logo {
+  background-color: transparent;
+  margin-right: auto;
+}
+
+.navbar a:not(.logo):hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar a.active {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+
+.navbar-right {
+  display: flex;
+}
+
+.footer {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bolder;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.left-column,
+.right-column {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+}
+
+.left-column h2 {
+  color: #800080;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.left-column p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  padding: 36px;
+}
+
+.card {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  height: 150px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 36px;
+}
+
+.card p {
+  text-align: center;
+  font-size: 24px;
+  padding: 0;
+}
+
+.difficulty {
+  background-color: #8a2be2;
+  color: black;
+}
+
+.duration {
+  background-color: #00ced1;
+}
+
+.category {
+  background-color: #ff8c00;
+}
+
+.entity-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.column-explanation {
+  font-size: 14px;
+  color: #666;
+  padding-bottom: 20px;
+  margin-bottom: auto;
+}
