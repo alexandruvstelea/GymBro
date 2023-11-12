@@ -19,6 +19,10 @@ app.use(
   "/public/images",
   express.static(path.join(__dirname, "public", "images"))
 );
+app.use(
+  "/public/audio",
+  express.static(path.join(__dirname, "public", "audio"))
+);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
