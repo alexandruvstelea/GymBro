@@ -1,4 +1,4 @@
-import mongoose from "../../db";
+import mongoose from "../../db.js";
 
 const exerciseSchema = new mongoose.Schema({
   name: { type: String, required: true },
