@@ -10,7 +10,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.set("views", path.join(__dirname, "src", "views"));
-
 app.set("view engine", "ejs");
 
 app.use("/", mainRouter);
