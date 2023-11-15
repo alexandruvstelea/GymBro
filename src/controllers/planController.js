@@ -38,6 +38,17 @@ planController.readById = async (req, res) => {
   }
 };
 
+planController.readByCategory = async (req, res) => {
+  try {
+    let id = req.params.category_id;
+    const plan = await Plan.find({ category: id }).exec();
+
+    res.status(200).json(plan);
+  } catch (error) {
+    res.status(500).json({ error: `An error has occurred: ${error.message}` });
+  }
+};
+
 planController.update = async (req, res) => {
   try {
     let id = req.params.plan_id;

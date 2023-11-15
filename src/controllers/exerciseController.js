@@ -2,7 +2,7 @@ import Exercise from "../models/Exercise.js";
 
 const exerciseController = {};
 
-exerciseController.insert = async (req, res) => {
+exerciseController.create = async (req, res) => {
   try {
     const new_exercise = new Exercise({
       name: req.body.name,
@@ -12,7 +12,7 @@ exerciseController.insert = async (req, res) => {
       category: req.body.category_id,
     });
     const result = await new_exercise.save();
-    res.status(201).json({ message: "Exercise inserted successfully." });
+    res.status(201).json({ message: "Exercise created successfully." });
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
   }
@@ -34,6 +34,17 @@ exerciseController.readById = async (req, res) => {
     res.status(201).json(exercise);
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
+  }
+};
+
+exerciseController.readByCategory = async (req, res) => {
+  try {
+    let id = req.params.category_id;
+    const exercise = await Exercise.find({ category: id }).exec();
+
+    res.status(200).json(exercise);
+  } catch (error) {
+    res.status(500).json({ error: `An error has occurred: ${error.message}` });
   }
 };
 

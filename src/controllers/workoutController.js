@@ -38,6 +38,17 @@ workoutController.readById = async (req, res) => {
   }
 };
 
+workoutController.readByCategory = async (req, res) => {
+  try {
+    let id = req.params.category_id;
+    const workout = await Workout.find({ category: id }).exec();
+
+    res.status(200).json(workout);
+  } catch (error) {
+    res.status(500).json({ error: `An error has occurred: ${error.message}` });
+  }
+};
+
 workoutController.update = async (req, res) => {
   try {
     let id = req.params.workout_id;

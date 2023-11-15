@@ -19,11 +19,11 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/render", mainRouter);
+app.use("/", mainRouter);
 app.use("/exercises", exerciseRouter);
 app.use("/categories", categoryRouter);
-app.use("/workout", workoutRouter);
-app.use("/plan", planRouter);
+app.use("/workouts", workoutRouter);
+app.use("/plans", planRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
