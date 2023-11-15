@@ -8,6 +8,10 @@ renderController.index = (req, res) => {
   res.render("index");
 };
 
+renderController.exercises = (req, res) => {
+  res.render("exercises");
+};
+
 renderController.workouts = (req, res) => {
   res.render("workouts");
 };
@@ -18,6 +22,10 @@ renderController.plans = (req, res) => {
 
 renderController.new = (req, res) => {
   res.render("new");
+};
+
+renderController.exercise = (req, res) => {
+  res.render("exercise");
 };
 
 renderController.workout = (req, res) => {
