@@ -1,6 +1,6 @@
 import mongoose from "../../db.js";
 
-const workoutSchema = new mongoose.Schema({
+const planSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   duration: { type: Number, required: true },
@@ -10,15 +10,15 @@ const workoutSchema = new mongoose.Schema({
     ref: "Category",
     required: true,
   },
-  exercises: [
+  workouts: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Exercise",
+      ref: "Workout",
       required: true,
     },
   ],
 });
 
-const Workout = mongoose.model("Workout", workoutSchema);
+const Plan = mongoose.model("Plan", planSchema);
 
-export default Workout;
+export default Plan;
