@@ -8,64 +8,27 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <a href="/render/index" class="logo">GymBro 👊🏼</a>
-      <div class="navbar-right">
-        <a href="/render/new">New!</a>
-        <a href="/render/plans">Plans</a>
-        <a href="/render/workouts">Workouts</a>
-        <a href="/render/exercises">Exercises</a>
-        <a href="/render/contact">Contact</a>
-      </div>
-    </nav>
+    <%- include("navbar/navbar") %>
     <header class="entity-title">Latest additions</header>
     <div class="card-container">
+      <% cardData.forEach(card => { %>
       <div class="card">
-        <a href="#" class="card">
+        <a href="/<%= card.title.toLowerCase() %>" class="card">
           <div class="card-content">
             <img
-              src="/public/images/plan.png"
+              src="/public/images/<%= card.image %>.png"
               alt="Image for exercises"
               width="450"
               height="450"
             />
-            <h3>Bulk like a Pro</h3>
-            <p>Category</p>
-            <p class="item-count">Date Added</p>
+            <h3><%= card.title %></h3>
+            <p><%= card.description %></p>
+            <p class="item-count">Number of items: <%= card.itemCount %></p>
           </div>
         </a>
       </div>
-      <div class="card">
-        <a href="#" class="card">
-          <div class="card-content">
-            <img
-              src="/public/images/workout.png"
-              alt="Image for exercises"
-              width="450"
-              height="450"
-            />
-            <h3>Chest</h3>
-            <p>Duration</p>
-            <p class="item-count">Date Added</p>
-          </div>
-        </a>
-      </div>
-      <div class="card">
-        <a href="#" class="card">
-          <div class="card-content">
-            <img
-              src="/public/images/dumbell.png"
-              alt="Image for exercises"
-              width="450"
-              height="450"
-            />
-            <h3>Pushup</h3>
-            <p>Difficulty</p>
-            <p class="item-count">Date Added</p>
-          </div>
-        </a>
-      </div>
+      <% }); %>
     </div>
-    <div class="footer">Developed by Alexandru-Vasile Stelea</div>
+    <%- include("footer/footer") %>
   </body>
 </html>

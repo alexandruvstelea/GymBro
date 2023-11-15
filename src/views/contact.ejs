@@ -8,16 +8,7 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <a href="/render/index" class="logo">GymBro 👊🏼</a>
-      <div class="navbar-right">
-        <a href="/render/new">New!</a>
-        <a href="/render/plans">Plans</a>
-        <a href="/render/workouts">Workouts</a>
-        <a href="/render/exercises">Exercises</a>
-        <a href="/render/contact">Contact</a>
-      </div>
-    </nav>
+    <%- include("navbar/navbar") %>
     <div class="content">
       <div class="left-column">
         <img
@@ -69,6 +60,6 @@
         </div>
       </div>
     </div>
-    <div class="footer">Developed by Alexandru-Vasile Stelea</div>
+    <%- include("footer/footer") %>
   </body>
 </html>

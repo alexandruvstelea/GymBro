@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/details.css" />
+    <title>GymBro 👊🏼 - by Alexandru Stelea</title>
+  </head>
+
+  <body>
+    <%- include("navbar/navbar") %>
+    <header class="entity-title"><%= entity.name %></header>
+    <div class="content">
+      <div class="left-column">
+        <h2>Description</h2>
+        <p><%= entity.description %></p>
+        <% if(extra) { %>
+        <h2><%= metadata.secondaryTitle %></h2>
+        <div class="horizontal-cards-section">
+          <% extraEntities.forEach(entity => { %>
+          <div class="card">
+            <div class="card-content">
+              <img
+                src="/public/images/<%= metadata.image %>.png"
+                alt="Image for exercises"
+                width="110"
+                height="110"
+              />
+              <h3><%= entity.name %></h3>
+              <a
+                href="/<%= metadata.endpoint %>/<%= entity.id %>"
+                class="card-button"
+                ><%= metadata.button%></a
+              >
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <% } %>
+      </div>
+      <div class="right-column">
+        <div class="card-stats difficulty">
+          <h2>Difficulty</h2>
+          <p><%= entity.difficulty %></p>
+        </div>
+        <div class="card-stats duration">
+          <h2>Duration</h2>
+          <p><%= entity.duration %></p>
+        </div>
+        <div class="card-stats category">
+          <h2>Category</h2>
+          <p><%= entity.category %></p>
+        </div>
+        <div class="column-explanation">
+          <p>* Difficulty ratings: easy, medium, hard</p>
+          <p>* Duration: time to complete 5 sets of 10 reps</p>
+        </div>
+      </div>
+    </div>
+    <%- include("footer/footer") %>
+  </body>
+</html>

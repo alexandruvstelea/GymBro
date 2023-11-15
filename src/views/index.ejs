@@ -8,63 +8,26 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <a href="/render/index" class="logo">GymBro 👊🏼</a>
-      <div class="navbar-right">
-        <a href="/render/new">New!</a>
-        <a href="/render/plans">Plans</a>
-        <a href="/render/workouts">Workouts</a>
-        <a href="/render/exercises">Exercises</a>
-        <a href="/render/contact">Contact</a>
-      </div>
-    </nav>
+    <%- include("navbar/navbar") %>
     <div class="card-container">
-      <div class="card">
-        <a href="/render/plans" class="card">
-          <div class="card-content">
-            <img
-              src="/public/images/plans.png"
-              alt="Image for exercises"
-              width="450"
-              height="450"
-            />
-            <h3>Plans</h3>
-            <p>Full plans to follow for continous muscle development.</p>
-            <p class="item-count">Number of items: 999</p>
-          </div>
-        </a>
-      </div>
-      <div class="card">
-        <a href="/render/workouts" class="card">
-          <div class="card-content">
-            <img
-              src="/public/images/workouts.png"
-              alt="Image for exercises"
-              width="450"
-              height="450"
-            />
-            <h3>Workouts</h3>
-            <p>Exercises put together for a day's worth strong workout.</p>
-            <p class="item-count">Number of items: 999</p>
-          </div>
-        </a>
-      </div>
-      <div class="card">
-        <a href="/render/exercises" class="card">
-          <div class="card-content">
-            <img
-              src="/public/images/exercises.png"
-              alt="Image for exercises"
-              width="450"
-              height="450"
-            />
-            <h3>Exercises</h3>
-            <p>Individual exercises that focus on specific muscles.</p>
-            <p class="item-count">Number of items: 999</p>
-          </div>
-        </a>
-      </div>
+      <% cardData.forEach(card => { %>
+        <div class="card">
+          <a href="/<%= card.title.toLowerCase() %>" class="card">
+            <div class="card-content">
+              <img
+                src="/public/images/<%= card.title.toLowerCase() %>.png"
+                alt="Image for exercises"
+                width="450"
+                height="450"
+              />
+              <h3><%= card.title %></h3>
+              <p><%= card.description %></p>
+              <p class="item-count">Number of items: <%= card.itemCount %></p>
+            </div>
+          </a>
+        </div>
+      <% }); %>
     </div>
-    <div class="footer">Developed by Alexandru-Vasile Stelea</div>
+    <%- include("footer/footer") %>
   </body>
 </html>
