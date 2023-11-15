@@ -3,6 +3,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import mainRouter from "./src/routes/renderingRoutes.js";
 import exerciseRouter from "./src/routes/exerciseRoutes.js";
+import categoryRouter from "./src/routes/categoryRoutes.js";
+import workoutRouter from "./src/routes/workoutRoutes.js";
+import planRouter from "./src/routes/planRoutes.js";
 
 const app = express();
 const port = 3030;
@@ -16,8 +19,11 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", mainRouter);
+app.use("/render", mainRouter);
 app.use("/exercises", exerciseRouter);
+app.use("/categories", categoryRouter);
+app.use("/workout", workoutRouter);
+app.use("/plan", planRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
