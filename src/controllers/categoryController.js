@@ -2,35 +2,43 @@ import Category from "../models/Category.js";
 
 const categoryController = {};
 
-categoryController.insert = async (req, res) => {
+categoryController.create = async (req, res) => {
   try {
     const new_category = new Category({
       name: req.body.name,
       category_for: req.body.for,
     });
     const result = await new_category.save();
-    res.status(201).json({ message: "Category inserted successfully." });
+    res.status(201).json({ message: "Category created successfully." });
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
   }
 };
 
-categoryController.readAll = async (req, res) => {
+categoryController.readAll = async () => {
   try {
     const categories = await Category.find({}).exec();
-    res.status(201).json({ all_categories: categories });
+    return categories;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
-categoryController.readById = async (req, res) => {
+categoryController.readById = async (id) => {
   try {
-    let id = req.params.category_id;
     const category = await Category.findById(id).exec();
-    res.status(201).json(category);
+    return category;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
+  }
+};
+
+categoryController.readByEntity = async (type) => {
+  try {
+    const categories = await Category.find({ category_for: type }).exec();
+    return categories;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
@@ -45,7 +53,6 @@ categoryController.update = async (req, res) => {
     }
     category.name = req.body.new_name;
     category.category_for = req.body.new_for;
-
     const updatedCategory = await category.save();
     res.status(200).json({ message: "Category updated succesfully." });
   } catch (error) {

@@ -1,7 +1,8 @@
-import counter from "../helper_functions/documentCounting.js";
-import objectRetriever from "../helper_functions/retrieveObjects.js";
-import categoryRetriever from "../helper_functions/retrieveCategories.js";
-import formatter from "../helper_functions/propetyFormating.js";
+import categoryController from "./categoryController.js";
+import exerciseController from "./exerciseController.js";
+import workoutController from "./workoutController.js";
+import planController from "./planController.js";
+import formatter from "./formatter.js";
 
 const renderController = {};
 
@@ -10,9 +11,9 @@ renderController.landingPage = (req, res) => {
 };
 
 renderController.index = async (req, res) => {
-  const exercisesCount = await counter.countExercises();
-  const workoutCount = await counter.countWorkouts();
-  const planCount = await counter.countPlans();
+  const exercisesCount = await exerciseController.countExercises();
+  const workoutCount = await workoutController.countWorkouts();
+  const planCount = await planController.countPlans();
 
   let cardData = [
     {
@@ -35,8 +36,8 @@ renderController.index = async (req, res) => {
 };
 
 renderController.exercises = async (req, res) => {
-  const exercises = await objectRetriever.getAllExercises();
-  const categories = await categoryRetriever.getEntityCategories("exercises");
+  const exercises = await exerciseController.readAll();
+  const categories = await categoryController.readByEntity("exercises");
   const metadata = {
     title: "Exercises",
     button: "View Exercise",
@@ -44,29 +45,29 @@ renderController.exercises = async (req, res) => {
     image: "exercise",
   };
   let entities = [];
-
-  exercises.forEach((exercise) => {
-    let string_difficulty = "";
-    if (exercise.difficulty == 1) {
-      string_difficulty = "Easy";
-    } else if (exercise.difficulty == 2) {
-      string_difficulty = "Medium";
-    } else {
-      string_difficulty = "Hard";
-    }
+  if (exercises.length === 0) {
     entities.push({
-      title: exercise.name,
-      attribute: string_difficulty,
-      id: exercise.id,
+      title: "No Exercises",
+      attribute: "No exercises available",
+      id: null,
     });
-  });
-
+    metadata.button = "Not available";
+    metadata.endpoint = "exercises";
+  } else {
+    exercises.forEach((exercise) => {
+      entities.push({
+        title: exercise.name,
+        attribute: formatter.formatDifficulty(exercise.difficulty),
+        id: exercise.id,
+      });
+    });
+  }
   res.render("explorer", { entities, metadata, categories });
 };
 
 renderController.workouts = async (req, res) => {
-  const workouts = await objectRetriever.getAllWorkouts();
-  const categories = await categoryRetriever.getEntityCategories("workouts");
+  const workouts = await workoutController.readAll();
+  const categories = await categoryController.readByEntity("workouts");
   const metadata = {
     title: "Workouts",
     button: "View Workout",
@@ -74,29 +75,29 @@ renderController.workouts = async (req, res) => {
     image: "workout",
   };
   let entities = [];
-
-  workouts.forEach((workout) => {
-    let string_difficulty = "";
-    if (workout.difficulty == 1) {
-      string_difficulty = "Easy";
-    } else if (workout.difficulty == 2) {
-      string_difficulty = "Medium";
-    } else {
-      string_difficulty = "Hard";
-    }
+  if (workouts.length === 0) {
     entities.push({
-      title: workout.name,
-      attribute: string_difficulty,
-      id: workout.id,
+      title: "No Workouts",
+      attribute: "No workouts available",
+      id: null,
     });
-  });
-
+    metadata.button = "Not available";
+    metadata.endpoint = "workouts";
+  } else {
+    workouts.forEach((workout) => {
+      entities.push({
+        title: workout.name,
+        attribute: formatter.formatDifficulty(workout.difficulty),
+        id: workout.id,
+      });
+    });
+  }
   res.render("explorer", { entities, metadata, categories });
 };
 
 renderController.plans = async (req, res) => {
-  const plans = await objectRetriever.getAllPlans();
-  const categories = await categoryRetriever.getEntityCategories("plans");
+  const plans = await planController.readAll();
+  const categories = await categoryController.readByEntity("plans");
   const metadata = {
     title: "Plans",
     button: "View Plan",
@@ -104,79 +105,72 @@ renderController.plans = async (req, res) => {
     image: "plan",
   };
   let entities = [];
-
-  plans.forEach((plan) => {
-    let string_difficulty = "";
-    if (plan.difficulty == 1) {
-      string_difficulty = "Easy";
-    } else if (plan.difficulty == 2) {
-      string_difficulty = "Medium";
-    } else {
-      string_difficulty = "Hard";
-    }
+  if (plans.length === 0) {
     entities.push({
-      title: plan.name,
-      attribute: string_difficulty,
-      id: plan.id,
+      title: "No Plans",
+      attribute: "No plans available",
+      id: null,
     });
-  });
-
+    metadata.button = "Not available";
+    metadata.endpoint = "plans";
+  } else {
+    plans.forEach((plan) => {
+      entities.push({
+        title: plan.name,
+        attribute: formatter.formatDifficulty(plan.difficulty),
+        id: plan.id,
+      });
+    });
+  }
   res.render("explorer", { entities, metadata, categories });
 };
 
 renderController.new = async (req, res) => {
   const [latestPlan, latestWorkout, latestExercise] = await Promise.all([
-    objectRetriever.getLatestPlan(),
-    objectRetriever.getLatestWorkout(),
-    objectRetriever.getLatestExercise(),
+    planController.getLatestPlan(),
+    workoutController.getLatestWorkout(),
+    exerciseController.getLatestExercise(),
   ]);
-
   let cardData = [
     {
-      title: latestPlan[0].name,
-      description: latestPlan[0].description,
+      title: latestPlan.length ? latestPlan[0].name : "No Plan Available",
+      description: latestPlan.length
+        ? latestPlan[0].description
+        : "No plan description",
       image: "plan",
     },
     {
-      title: latestWorkout[0].name,
-      description: latestWorkout[0].description,
+      title: latestWorkout.length
+        ? latestWorkout[0].name
+        : "No Workout Available",
+      description: latestWorkout.length
+        ? latestWorkout[0].description
+        : "No workout description",
       image: "workout",
     },
     {
-      title: latestExercise[0].name,
-      description: latestExercise[0].description,
+      title: latestExercise.length
+        ? latestExercise[0].name
+        : "No Exercise Available",
+      description: latestExercise.length
+        ? latestExercise[0].description
+        : "No exercise description",
       image: "exercise",
     },
   ];
-
   res.render("new", { cardData });
 };
 
 renderController.exercise = async (req, res) => {
   let id = req.params.exercise_id;
-  const exercise = await objectRetriever.getExerciseById(id);
-  let string_difficulty = "";
-  if (exercise.difficulty == 1) {
-    string_difficulty = "Easy";
-  } else if (exercise.difficulty == 2) {
-    string_difficulty = "Medium";
-  } else {
-    string_difficulty = "Hard";
-  }
-
-  const category = await categoryRetriever.getCategoryById(exercise.category);
-
-  const minutes = Math.floor(exercise.duration / 60);
-  const remainingSeconds = exercise.duration % 60;
-  const formattedTime = `${minutes}min ${remainingSeconds}s`;
-
+  const exercise = await exerciseController.getExerciseById(id);
+  const category = await categoryController.getCategoryById(exercise.category);
   const extra = false;
-
   const entity = {
     name: exercise.name,
     description: exercise.description,
-    difficulty: string_difficulty,
-    duration: formattedTime,
+    difficulty: formatter.formatDifficulty(exercise.difficulty),
+    duration: formatter.formatDuration(exercise.duration),
     category: category.name,
   };
   res.render("details", { entity, extra });
@@ -184,17 +178,12 @@ renderController.exercise = async (req, res) => {
 
 renderController.workout = async (req, res) => {
   let id = req.params.workout_id;
-  const workout = await objectRetriever.getWorkoutById(id);
-  const category = await categoryRetriever.getCategoryById(workout.category);
-  const formattedTime = await formatter.formatDuration(workout.duration);
-  const string_difficulty = await formatter.formatDifficulty(
-    workout.difficulty
-  );
+  const workout = await workoutController.getWorkoutById(id);
+  const category = await categoryController.getCategoryById(workout.category);
   const extraEntities = await objectRetriever.getWorkoutExercises(
     workout.exercises
   );
   const extra = true;
-
   const metadata = {
     title: "Exercises",
     button: "View Exercise",
@@ -202,27 +191,22 @@ renderController.workout = async (req, res) => {
     image: "exercise",
     secondaryTitle: "Exercises",
   };
-
   const entity = {
     name: workout.name,
     description: workout.description,
-    difficulty: string_difficulty,
-    duration: formattedTime,
+    difficulty: formatter.formatDifficulty(workout.difficulty),
+    duration: formatter.formatDuration(workout.duration),
     category: category.name,
   };
-
   res.render("details", { entity, extra, metadata, extraEntities });
 };
 
 renderController.plan = async (req, res) => {
   let id = req.params.plan_id;
-  const plan = await objectRetriever.getPlanById(id);
-  const category = await categoryRetriever.getCategoryById(plan.category);
-  const formattedTime = await formatter.formatDuration(plan.duration);
-  const string_difficulty = await formatter.formatDifficulty(plan.difficulty);
+  const plan = await planController.getPlanById(id);
+  const category = await categoryController.getCategoryById(plan.category);
   const extraEntities = await objectRetriever.getPlanWorkouts(plan.workouts);
   const extra = true;
-
   const metadata = {
     title: "Workouts",
     button: "View Workout",
@@ -230,15 +214,13 @@ renderController.plan = async (req, res) => {
     image: "workout",
     secondaryTitle: "Workouts",
   };
-
   const entity = {
     name: plan.name,
     description: plan.description,
-    difficulty: string_difficulty,
-    duration: formattedTime,
+    difficulty: formatter.formatDifficulty(plan.difficulty),
+    duration: formatter.formatDuration(plan.duration),
     category: category.name,
   };
-
   res.render("details", { entity, extra, metadata, extraEntities });
 };
 

@@ -2,7 +2,7 @@ import Plan from "../models/Plan.js";
 
 const planController = {};
 
-planController.insert = async (req, res) => {
+planController.create = async (req, res) => {
   try {
     const new_plan = new Plan({
       name: req.body.name,
@@ -19,22 +19,21 @@ planController.insert = async (req, res) => {
   }
 };
 
-planController.readAll = async (req, res) => {
+planController.readAll = async () => {
   try {
     const plans = await Plan.find({}).exec();
-    res.status(201).json({ all_plans: plans });
+    return plans;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
-planController.readById = async (req, res) => {
+planController.readById = async (id) => {
   try {
-    let id = req.params.plan_id;
     const plan = await Plan.findById(id).exec();
-    res.status(201).json(plan);
+    return plan;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
@@ -42,7 +41,6 @@ planController.readByCategory = async (req, res) => {
   try {
     let id = req.params.category_id;
     const plan = await Plan.find({ category: id }).exec();
-
     res.status(200).json(plan);
   } catch (error) {
     res.status(500).json({ error: `An error has occurred: ${error.message}` });
@@ -75,16 +73,45 @@ planController.delete = async (req, res) => {
   try {
     let id = req.params.plan_id;
     const deletedPlan = await Plan.findByIdAndDelete(id).exec();
-
     if (!deletedPlan) {
       return res
         .status(404)
         .json({ error: `An error has occured ${error.message}` });
     }
-
     res.status(200).json({ message: "Plan deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
+  }
+};
+
+planController.countPlans = async () => {
+  try {
+    const number_of_documents = await Plan.countDocuments().exec();
+    return number_of_documents;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
+  }
+};
+
+planController.getPlanWorkouts = async (workoutsId) => {
+  try {
+    let workouts = [];
+    for (const id of workoutsId) {
+      let exercise = await objectRetriever.getWorkoutById(id);
+      workouts.push(exercise);
+    }
+    return workouts;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
+  }
+};
+
+planController.getLatestPlan = async () => {
+  try {
+    const latestPlan = await Plan.find().sort({ _id: -1 }).limit(1).exec();
+    return latestPlan;
+  } catch (error) {
+    res.status(500).json({ error: `An error occurred: ${error.message}` });
   }
 };
 

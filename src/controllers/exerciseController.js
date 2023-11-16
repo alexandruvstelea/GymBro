@@ -18,22 +18,21 @@ exerciseController.create = async (req, res) => {
   }
 };
 
-exerciseController.readAll = async (req, res) => {
+exerciseController.readAll = async () => {
   try {
     const exercises = await Exercise.find({}).exec();
-    res.status(201).json({ all_exercises: exercises });
+    return exercises;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
-exerciseController.readById = async (req, res) => {
+exerciseController.readById = async (id) => {
   try {
-    let id = req.params.exercise_id;
     const exercise = await Exercise.findById(id).exec();
-    res.status(201).json(exercise);
+    return exercise;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
@@ -41,7 +40,6 @@ exerciseController.readByCategory = async (req, res) => {
   try {
     let id = req.params.category_id;
     const exercise = await Exercise.find({ category: id }).exec();
-
     res.status(200).json(exercise);
   } catch (error) {
     res.status(500).json({ error: `An error has occurred: ${error.message}` });
@@ -73,16 +71,35 @@ exerciseController.delete = async (req, res) => {
   try {
     let id = req.params.exercise_id;
     const deletedExercise = await Exercise.findByIdAndDelete(id).exec();
-
     if (!deletedExercise) {
       return res
         .status(404)
         .json({ error: `An error has occured ${error.message}` });
     }
-
     res.status(200).json({ message: "Exercise deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
+  }
+};
+
+exerciseController.countExercises = async () => {
+  try {
+    const number_of_documents = await Exercise.countDocuments().exec();
+    return number_of_documents;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
+  }
+};
+
+exerciseController.getLatestExercise = async () => {
+  try {
+    const latestExercise = await Exercise.find()
+      .sort({ _id: -1 })
+      .limit(1)
+      .exec();
+    return latestExercise;
+  } catch (error) {
+    res.status(500).json({ error: `An error occurred: ${error.message}` });
   }
 };
 

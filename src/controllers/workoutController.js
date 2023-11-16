@@ -1,8 +1,10 @@
 import Workout from "../models/Workout.js";
+import Exercise from "../models/Exercise.js";
+import exerciseController from "./exerciseController.js";
 
 const workoutController = {};
 
-workoutController.insert = async (req, res) => {
+workoutController.create = async (req, res) => {
   try {
     const new_workout = new Workout({
       name: req.body.name,
@@ -19,22 +21,21 @@ workoutController.insert = async (req, res) => {
   }
 };
 
-workoutController.readAll = async (req, res) => {
+workoutController.readAll = async () => {
   try {
     const workouts = await Workout.find({}).exec();
-    res.status(201).json({ all_workouts: workouts });
+    return workouts;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
-workoutController.readById = async (req, res) => {
+workoutController.readById = async (id) => {
   try {
-    let id = req.params.workout_id;
     const workout = await Workout.findById(id).exec();
-    res.status(201).json(workout);
+    return workout;
   } catch (error) {
-    res.status(500).json({ error: `An error has occured ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
@@ -42,7 +43,6 @@ workoutController.readByCategory = async (req, res) => {
   try {
     let id = req.params.category_id;
     const workout = await Workout.find({ category: id }).exec();
-
     res.status(200).json(workout);
   } catch (error) {
     res.status(500).json({ error: `An error has occurred: ${error.message}` });
@@ -75,16 +75,48 @@ workoutController.delete = async (req, res) => {
   try {
     let id = req.params.workout_id;
     const deletedWorkout = await Workout.findByIdAndDelete(id).exec();
-
     if (!deletedWorkout) {
       return res
         .status(404)
         .json({ error: `An error has occured ${error.message}` });
     }
-
     res.status(200).json({ message: "Workout deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
+  }
+};
+
+workoutController.countWorkouts = async () => {
+  try {
+    const number_of_documents = await Workout.countDocuments().exec();
+    return number_of_documents;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
+  }
+};
+
+workoutController.getWorkoutExercises = async (exercisesId) => {
+  try {
+    let exercises = [];
+    for (const id of exerciseId) {
+      let exercise = await exerciseController.getExerciseById(id);
+      exercises.push(exercise);
+    }
+    return exercises;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
+  }
+};
+
+workoutController.getLatestWorkout = async () => {
+  try {
+    const latestWorkout = await Exercise.find()
+      .sort({ _id: -1 })
+      .limit(1)
+      .exec();
+    return latestWorkout;
+  } catch (error) {
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
