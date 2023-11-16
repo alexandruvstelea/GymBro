@@ -10,6 +10,7 @@ const exerciseSchema = new mongoose.Schema({
     ref: "Category",
     required: true,
   },
+  date_added: { type: Date, default: Date.now },
 });
 
 const Exercise = mongoose.model("Exercise", exerciseSchema);

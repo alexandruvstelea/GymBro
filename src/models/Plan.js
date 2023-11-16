@@ -17,6 +17,7 @@ const planSchema = new mongoose.Schema({
       required: true,
     },
   ],
+  date_added: { type: Date, default: Date.now },
 });
 
 const Plan = mongoose.model("Plan", planSchema);

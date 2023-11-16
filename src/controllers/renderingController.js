@@ -138,6 +138,9 @@ renderController.new = async (req, res) => {
         ? latestPlan[0].description
         : "No plan description",
       image: "plan",
+      date_added: latestPlan.length
+        ? latestPlan[0].date_added
+        : "No Date Available",
     },
     {
       title: latestWorkout.length
@@ -147,6 +150,9 @@ renderController.new = async (req, res) => {
         ? latestWorkout[0].description
         : "No workout description",
       image: "workout",
+      date_added: latestWorkout.length
+        ? latestWorkout[0].date_added
+        : "No Date Available",
     },
     {
       title: latestExercise.length
@@ -156,6 +162,9 @@ renderController.new = async (req, res) => {
         ? latestExercise[0].description
         : "No exercise description",
       image: "exercise",
+      date_added: latestExercise.length
+        ? latestExercise[0].date_added
+        : "No Date Available",
     },
   ];
   res.render("new", { cardData });
