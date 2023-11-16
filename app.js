@@ -1,11 +1,12 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import mainRouter from "./src/routes/renderingRoutes.js";
+import userRouter from "./src/routes/userRenderingRoutes.js";
 import exerciseRouter from "./src/routes/exerciseRoutes.js";
 import categoryRouter from "./src/routes/categoryRoutes.js";
 import workoutRouter from "./src/routes/workoutRoutes.js";
 import planRouter from "./src/routes/planRoutes.js";
+import adminRouter from "./src/routes/adminRenderingRoutes.js";
 
 const app = express();
 const port = 3030;
@@ -19,11 +20,12 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", mainRouter);
+app.use("/", userRouter);
 app.use("/exercises", exerciseRouter);
 app.use("/categories", categoryRouter);
 app.use("/workouts", workoutRouter);
 app.use("/plans", planRouter);
+app.use("/admin", adminRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(

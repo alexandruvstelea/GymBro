@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/adminExercises.css" />
+    <title>GymBro 👊🏼 - by Alexandru Stelea</title>
+  </head>
+
+  <body>
+    <%- include("navbar/navbar") %>
+    <header class="entity-title">Admin Dashboard</header>
+    <div class="table-container">
+      <% if (entities.length === 0) { %>
+      <p>No Exercises Available</p>
+      <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Difficulty</th>
+            <th>Duration</th>
+            <th>Category</th>
+            <th>Date Added</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% entities.forEach(exercise => { %>
+          <tr>
+            <td><%= exercise.title %></td>
+            <td><%= exercise.difficulty %></td>
+            <td><%= exercise.duration %></td>
+            <td><%= exercise.category %></td>
+            <td><%= exercise.date_added %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+    <%- include("footer/footer") %>
+  </body>
+</html>

@@ -38,7 +38,7 @@ exerciseController.readById = async (id) => {
 
 exerciseController.readByCategory = async (req, res) => {
   try {
-    let id = req.params.category_id;
+    let id = req.params.categoryId;
     const exercise = await Exercise.find({ category: id }).exec();
     res.status(200).json(exercise);
   } catch (error) {
@@ -48,7 +48,7 @@ exerciseController.readByCategory = async (req, res) => {
 
 exerciseController.update = async (req, res) => {
   try {
-    let id = req.params.exercise_id;
+    let id = req.params.exerciseId;
     const exercise = await Exercise.findById(id).exec();
     if (!exercise) {
       return res
@@ -69,7 +69,7 @@ exerciseController.update = async (req, res) => {
 
 exerciseController.delete = async (req, res) => {
   try {
-    let id = req.params.exercise_id;
+    let id = req.params.exerciseId;
     const deletedExercise = await Exercise.findByIdAndDelete(id).exec();
     if (!deletedExercise) {
       return res
@@ -99,7 +99,7 @@ exerciseController.getLatestExercise = async () => {
       .exec();
     return latestExercise;
   } catch (error) {
-    res.status(500).json({ error: `An error occurred: ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 

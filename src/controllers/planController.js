@@ -1,4 +1,5 @@
 import Plan from "../models/Plan.js";
+import workoutController from "./workoutController.js";
 
 const planController = {};
 
@@ -39,7 +40,7 @@ planController.readById = async (id) => {
 
 planController.readByCategory = async (req, res) => {
   try {
-    let id = req.params.category_id;
+    let id = req.params.categoryId;
     const plan = await Plan.find({ category: id }).exec();
     res.status(200).json(plan);
   } catch (error) {
@@ -49,7 +50,7 @@ planController.readByCategory = async (req, res) => {
 
 planController.update = async (req, res) => {
   try {
-    let id = req.params.plan_id;
+    let id = req.params.planId;
     const plan = await Plan.findById(id).exec();
     if (!plan) {
       return res
@@ -71,7 +72,7 @@ planController.update = async (req, res) => {
 
 planController.delete = async (req, res) => {
   try {
-    let id = req.params.plan_id;
+    let id = req.params.planId;
     const deletedPlan = await Plan.findByIdAndDelete(id).exec();
     if (!deletedPlan) {
       return res
@@ -97,7 +98,7 @@ planController.getPlanWorkouts = async (workoutsId) => {
   try {
     let workouts = [];
     for (const id of workoutsId) {
-      let exercise = await objectRetriever.getWorkoutById(id);
+      let exercise = await workoutController.readById(id);
       workouts.push(exercise);
     }
     return workouts;
@@ -111,7 +112,7 @@ planController.getLatestPlan = async () => {
     const latestPlan = await Plan.find().sort({ _id: -1 }).limit(1).exec();
     return latestPlan;
   } catch (error) {
-    res.status(500).json({ error: `An error occurred: ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 

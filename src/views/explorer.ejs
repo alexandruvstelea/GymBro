@@ -14,29 +14,33 @@
         <div class="categories-list">
           <a href="#" class="category">All</a>
           <% categories.forEach(category => { %>
-            <a href="#" class="category"><%= category.name %></a>
+          <a href="#" class="category"><%= category.name %></a>
           <% }); %>
         </div>
-        <a href="#" class="admin-button">Admin Dashboard</a>
+        <a href="/admin/index" class="admin-button">Admin Dashboard</a>
       </div>
       <div class="main-content">
-       <%- include("navbar/navbar") %>
+        <%- include("navbar/navbar") %>
         <header class="entity-title"><%= metadata.title %></header>
         <div class="cards-container">
           <% entities.forEach(entity => { %>
-            <div class="card">
-              <div class="card-content">
-                <img
-                  src="/public/images/<%= metadata.image %>.png"
-                  alt="Image for exercises"
-                  width="110"
-                  height="110"
-                />
-                <h3><%= entity.title %></h3>
-                <p><%= entity.attribute %></p>
-                <a href="/<%= metadata.endpoint %>/<%= entity.id %>" class="card-button"><%= metadata.button%></a>
-              </div>
+          <div class="card">
+            <div class="card-content">
+              <img
+                src="/public/images/<%= metadata.image %>.png"
+                alt="Image for exercises"
+                width="110"
+                height="110"
+              />
+              <h3><%= entity.title %></h3>
+              <p><%= entity.attribute %></p>
+              <a
+                href="/<%= metadata.endpoint %>/<%= entity.id %>"
+                class="card-button"
+                ><%= metadata.button%></a
+              >
             </div>
+          </div>
           <% }); %>
         </div>
         <%- include("footer/footer") %>

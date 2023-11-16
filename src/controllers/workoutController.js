@@ -41,7 +41,7 @@ workoutController.readById = async (id) => {
 
 workoutController.readByCategory = async (req, res) => {
   try {
-    let id = req.params.category_id;
+    let id = req.params.categoryId;
     const workout = await Workout.find({ category: id }).exec();
     res.status(200).json(workout);
   } catch (error) {
@@ -51,7 +51,7 @@ workoutController.readByCategory = async (req, res) => {
 
 workoutController.update = async (req, res) => {
   try {
-    let id = req.params.workout_id;
+    let id = req.params.workoutId;
     const workout = await Workout.findById(id).exec();
     if (!workout) {
       return res
@@ -73,7 +73,7 @@ workoutController.update = async (req, res) => {
 
 workoutController.delete = async (req, res) => {
   try {
-    let id = req.params.workout_id;
+    let id = req.params.workoutId;
     const deletedWorkout = await Workout.findByIdAndDelete(id).exec();
     if (!deletedWorkout) {
       return res
@@ -98,8 +98,8 @@ workoutController.countWorkouts = async () => {
 workoutController.getWorkoutExercises = async (exercisesId) => {
   try {
     let exercises = [];
-    for (const id of exerciseId) {
-      let exercise = await exerciseController.getExerciseById(id);
+    for (const id of exercisesId) {
+      let exercise = await exerciseController.readById(id);
       exercises.push(exercise);
     }
     return exercises;
