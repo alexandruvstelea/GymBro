@@ -276,6 +276,8 @@ renderUser.new = async (req, res) => {
       date_added: latestPlan.length
         ? await formatter.formatDate(latestPlan[0].date_added)
         : "No Date Available",
+      entityId: latestPlan.length ? latestPlan[0].id : "/",
+      entityType: "plan",
     },
     {
       title: latestWorkout.length
@@ -288,6 +290,8 @@ renderUser.new = async (req, res) => {
       date_added: latestWorkout.length
         ? await formatter.formatDate(latestWorkout[0].date_added)
         : "No Date Available",
+      entityId: latestWorkout.length ? latestWorkout[0].id : "/",
+      entityType: "workout",
     },
     {
       title: latestExercise.length
@@ -300,6 +304,8 @@ renderUser.new = async (req, res) => {
       date_added: latestExercise.length
         ? await formatter.formatDate(latestExercise[0].date_added)
         : "No Date Available",
+      entityId: latestExercise.length ? latestExercise[0].id : "/",
+      entityType: "exercise",
     },
   ];
   res.render("new", { cardData });
