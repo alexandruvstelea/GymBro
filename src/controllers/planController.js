@@ -100,7 +100,11 @@ planController.countPlans = async () => {
     const number_of_documents = await Plan.countDocuments().exec();
     return number_of_documents;
   } catch (error) {
-    throw new Error(`An error has occurred: ${error.message}`);
+    if (error.message.includes("buffering timed out")) {
+      return 0;
+    } else {
+      throw new Error(`An error has occurred: ${error.message}`);
+    }
   }
 };
 

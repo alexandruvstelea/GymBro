@@ -1,100 +1,74 @@
-import mongoose from "../../db.js";
+import mongoose from "mongoose";
+import faker from "faker";
+import Category from "./src/models/Category.js";
+import Exercise from "./src/models/Exercise.js";
+import Plan from "./src/models/Plan.js";
+import Workout from "./src/models/Workout.js";
+import "dotenv/config";
 
-const categorySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  category_for: [{ type: String, required: true }],
-  date_added: { type: Date, default: Date.now },
+const MONGO_URI = process.env.MONGO_URI;
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const Category = mongoose.model("Category", categorySchema);
-
-const exerciseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  difficulty: { type: Number, required: true },
-  duration: { type: Number, required: true },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
-  },
-  date_added: { type: Date, default: Date.now },
-});
-
-const Exercise = mongoose.model("Exercise", exerciseSchema);
-
-const planSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  duration: { type: Number, required: true },
-  difficulty: { type: Number, required: true },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
-  },
-  workouts: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Workout",
-      required: true,
-    },
-  ],
-  date_added: { type: Date, default: Date.now },
-});
-
-const Plan = mongoose.model("Plan", planSchema);
-
-const workoutSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  duration: { type: Number, required: true },
-  difficulty: { type: Number, required: true },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
-  },
-  exercises: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Exercise",
-      required: true,
-    },
-  ],
-  date_added: { type: Date, default: Date.now },
-});
-
-const Workout = mongoose.model("Workout", workoutSchema);
-
-const generateCategoryData = async () => {
-  try {
-    const categories = [];
-    for (let i = 0; i < 5; i++) {
-      const category = new Category({
-        name: `Category ${i + 1}`,
-        category_for: [`CategoryFor ${i + 1}`],
-      });
-      await category.save();
-      categories.push(category);
-    }
-    return categories;
-  } catch (error) {
-    console.error("Error generating Category data:", error);
+async function createFakeData() {
+  const categories = [];
+  for (let i = 0; i < 10; i++) {
+    const category = new Category({
+      name: faker.commerce.department(),
+      category_for: [faker.random.word()],
+    });
+    categories.push(await category.save());
   }
-};
 
-const generateExerciseData = async () => {};
+  const exercises = [];
+  for (let i = 0; i < 50; i++) {
+    const exercise = new Exercise({
+      name: faker.lorem.word(),
+      description: faker.lorem.sentence(),
+      difficulty: faker.random.number({ min: 1, max: 5 }),
+      duration: faker.random.number({ min: 5, max: 60 }),
+      category: faker.random.arrayElement(categories)._id,
+    });
+    exercises.push(await exercise.save());
+  }
 
-const generatePlanData = async () => {};
+  const workouts = [];
+  for (let i = 0; i < 20; i++) {
+    const workout = new Workout({
+      name: faker.lorem.word(),
+      description: faker.lorem.sentence(),
+      duration: faker.random.number({ min: 15, max: 120 }),
+      difficulty: faker.random.number({ min: 1, max: 5 }),
+      category: faker.random.arrayElement(categories)._id,
+      exercises: faker.random.arrayElements(
+        exercises.map((ex) => ex._id),
+        5
+      ),
+    });
+    workouts.push(await workout.save());
+  }
 
-const generateWorkoutData = async () => {};
+  for (let i = 0; i < 10; i++) {
+    const plan = new Plan({
+      name: faker.lorem.word(),
+      description: faker.lorem.sentence(),
+      duration: faker.random.number({ min: 1, max: 12 }),
+      difficulty: faker.random.number({ min: 1, max: 5 }),
+      category: faker.random.arrayElement(categories)._id,
+      workouts: faker.random.arrayElements(
+        workouts.map((w) => w._id),
+        3
+      ),
+    });
+    await plan.save();
+  }
 
-const saveData = async () => {
-  await generateCategoryData();
-  await generateExerciseData();
-  await generatePlanData();
-  await generateWorkoutData();
-};
+  console.log("Fake data generated successfully!");
+}
 
-saveData();
+createFakeData().then(() => {
+  mongoose.disconnect();
+});
