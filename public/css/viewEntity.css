@@ -94,8 +94,8 @@ html {
   padding: 10px;
   color: white;
   font-weight: bold;
-  margin: 5px 0; /* Space between buttons */
-  transition: transform 0.3s ease; /* Smooth transition for hover */
+  margin: 5px 0; 
+  transition: transform 0.3s ease; 
   color: white;
   padding: 10px 20px;
   margin: 10px 0;
@@ -105,9 +105,9 @@ html {
   text-decoration: none;
 }
 .category {
-  border: 2px solid transparent; /* Transparent border initially */
-  box-shadow: 0px 0px 4px black; /* Initial subtle shadow */
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform effects */
+  border: 2px solid transparent; 
+  box-shadow: 0px 0px 4px black; 
+  transition: box-shadow 0.3s ease, transform 0.3s ease; 
   font-size: 36px;
 }
 
@@ -119,7 +119,7 @@ html {
 }
 
 .category:hover {
-  border-color: rgba(255, 255, 255, 0.3); /* Slight change in border color */
+  border-color: rgba(255, 255, 255, 0.3); 
   transition: background-color 0.3s ease;
   transform: scale(1.1);
 }
@@ -145,7 +145,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  overflow-y: auto; /* Add this line to enable vertical scrolling */
+  overflow-y: auto; 
   max-height: 77vh;
 }
 
