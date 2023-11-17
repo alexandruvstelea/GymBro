@@ -27,7 +27,7 @@ GymBro is a web application for managing and accessing fitness-related content, 
    ![Explorer](./public/images/explorer.png)
 
 3. **Entity Detailed View**:
-   ![Entity Detailed View](./public/images/details.png)
+   ![Entity Detailed View](./public/images/detailed_view.png)
 
 4. **Admin Dashboard**:
    ![Admin Dashboard](./public/images/admin.png)
