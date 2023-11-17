@@ -15,10 +15,10 @@ mongoose.connect(MONGO_URI, {
 
 async function createFakeData() {
   const categories = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const category = new Category({
       name: faker.commerce.department(),
-      category_for: [faker.random.word()],
+      category_for: ["exercises", "workouts"],
     });
     categories.push(await category.save());
   }
