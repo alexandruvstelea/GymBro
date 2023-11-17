@@ -6,11 +6,21 @@ const workoutController = {};
 
 workoutController.create = async (req, res) => {
   try {
+    const exerciseIds = req.body.exercises;
+    const exercises = await Exercise.find({ _id: { $in: exerciseIds } });
+    const totalDuration = exercises.reduce(
+      (sum, exercise) => sum + exercise.duration,
+      0
+    );
+    const averageDifficulty = Math.ceil(
+      exercises.reduce((sum, exercise) => sum + exercise.difficulty, 0) /
+        exercises.length
+    );
     const new_workout = new Workout({
       name: req.body.name,
       description: req.body.description,
-      difficulty: req.body.difficulty,
-      duration: req.body.duration,
+      difficulty: averageDifficulty,
+      duration: totalDuration,
       category: req.body.category_id,
       exercises: req.body.exercises,
     });
@@ -39,13 +49,12 @@ workoutController.readById = async (id) => {
   }
 };
 
-workoutController.readByCategory = async (req, res) => {
+workoutController.readByCategory = async (id) => {
   try {
-    let id = req.params.categoryId;
-    const workout = await Workout.find({ category: id }).exec();
-    res.status(200).json(workout);
+    const workouts = await Workout.find({ category: id }).exec();
+    return workouts;
   } catch (error) {
-    res.status(500).json({ error: `An error has occurred: ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 
@@ -110,7 +119,7 @@ workoutController.getWorkoutExercises = async (exercisesId) => {
 
 workoutController.getLatestWorkout = async () => {
   try {
-    const latestWorkout = await Exercise.find()
+    const latestWorkout = await Workout.find()
       .sort({ _id: -1 })
       .limit(1)
       .exec();

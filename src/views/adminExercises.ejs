@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/adminExercises.css" />
     <title>GymBro 👊🏼 - by Alexandru Stelea</title>
+    <script src="/JS/adminExercises.js" defer></script>
   </head>
 
   <body>
@@ -22,6 +23,8 @@
             <th>Duration</th>
             <th>Category</th>
             <th>Date Added</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -32,11 +35,35 @@
             <td><%= exercise.duration %></td>
             <td><%= exercise.category %></td>
             <td><%= exercise.date_added %></td>
+            <td>
+              <a
+                class="edit-button"
+                href="/admin/exercises/edit/<%= exercise.id %>"
+              >
+                Edit
+              </a>
+            </td>
+            <td>
+              <button
+                class="delete-button"
+                onclick="deleteEntity('<%= exercise.id %>')"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
           <% }); %>
         </tbody>
       </table>
       <% } %>
+    </div>
+    <div class="button-container">
+      <a class="button-landing" href="/admin/exercises/add">
+        <span class="top-key"></span>
+        <span class="text">Add Exercise</span>
+        <span class="bottom-key-1"></span>
+        <span class="bottom-key-2"></span>
+      </a>
     </div>
     <%- include("footer/footer") %>
   </body>

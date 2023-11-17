@@ -12,7 +12,7 @@ exerciseController.create = async (req, res) => {
       category: req.body.category_id,
     });
     const result = await new_exercise.save();
-    res.status(201).json({ message: "Exercise created successfully." });
+    res.redirect("/admin/exercises");
   } catch (error) {
     res.status(500).json({ error: `An error has occured ${error.message}` });
   }
@@ -36,13 +36,12 @@ exerciseController.readById = async (id) => {
   }
 };
 
-exerciseController.readByCategory = async (req, res) => {
+exerciseController.readByCategory = async (id) => {
   try {
-    let id = req.params.categoryId;
-    const exercise = await Exercise.find({ category: id }).exec();
-    res.status(200).json(exercise);
+    const exercises = await Exercise.find({ category: id }).exec();
+    return exercises;
   } catch (error) {
-    res.status(500).json({ error: `An error has occurred: ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 

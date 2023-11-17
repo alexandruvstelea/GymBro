@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/editExercise.css" />
+    <script src="/JS/editExercise.js" defer></script>
+    <title>Edit Exercise</title>
+  </head>
+  <body>
+    <input type="hidden" id="exerciseId" name="exerciseId" value="<%= exercise.id %>" />
+    <%- include("navbar/navbar") %>
+    <div class="container">
+        <h1>Edit Exercise</h1>
+        <form id="editExerciseForm" action="/exercises/update/<%= exercise.id %>" method="POST">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="new_name" required maxlength="30" value="<%= exercise.name %>"/><br /><br />
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="new_description" required maxlength="500"><%= exercise.description %></textarea><br /><br />
+
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty" name="new_difficulty" required>
+            <option value="1" <%= exercise.difficulty === 1 ? 'selected' : '' %>>Easy</option>
+            <option value="2" <%= exercise.difficulty === 2 ? 'selected' : '' %>>Medium</option>
+            <option value="3" <%= exercise.difficulty === 3 ? 'selected' : '' %>>Hard</option>
+          </select><br /><br />
+
+          <label for="duration">Duration:</label>
+          <input type="number" id="duration" name="new_duration" required value="<%= exercise.duration %>"/><br /><br />
+
+          <label for="category">Category</label>
+          <select id="category" name="new_category_id" required>
+            <% categories.forEach(category => { %>
+            <option value="<%= category.id %>" <%= exercise.category.toString() === category.id.toString() ? 'selected' : '' %>><%= category.name %></option>
+            <% }); %>
+          </select><br /><br />
+
+          <input type="submit" value="Update Exercise" />
+        </form>
+    </div>
+    <%- include("footer/footer") %>
+  </body>
+</html>

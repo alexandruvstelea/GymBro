@@ -12,12 +12,6 @@ renderAdmin.index = (req, res) => {
 
 renderAdmin.exercises = async (req, res) => {
   const exercises = await exerciseController.readAll();
-  const metadata = {
-    title: "Exercises",
-    button: "View Exercise",
-    endpoint: "exercise",
-    image: "exercise",
-  };
   let entities = [];
   if (exercises.length === 0) {
     entities.push({
@@ -25,8 +19,6 @@ renderAdmin.exercises = async (req, res) => {
       attribute: "No exercises available",
       id: null,
     });
-    metadata.button = "Not available";
-    metadata.endpoint = "exercises";
   } else {
     for (const exercise of exercises) {
       const category = await categoryController.readById(exercise.category);
@@ -36,9 +28,23 @@ renderAdmin.exercises = async (req, res) => {
         duration: await formatter.formatDuration(exercise.duration),
         category: category ? category.name : "Unknown",
         date_added: await formatter.formatDate(exercise.date_added),
+        id: exercise.id,
       });
     }
   }
-  res.render("adminExercises", { entities, metadata });
+  res.render("adminExercises", { entities });
 };
+
+renderAdmin.add = async (req, res) => {
+  const categories = await categoryController.readByEntity("exercises");
+  res.render("addExercise", { categories });
+};
+
+renderAdmin.edit = async (req, res) => {
+  let id = req.params.exerciseId;
+  const categories = await categoryController.readByEntity("exercises");
+  const exercise = await exerciseController.readById(id);
+  res.render("editExercise", { categories, exercise });
+};
+
 export default renderAdmin;

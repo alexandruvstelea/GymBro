@@ -6,15 +6,18 @@
     <link rel="stylesheet" href="/css/viewEntity.css" />
     <title>GymBro 👊🏼 - by Alexandru Stelea</title>
   </head>
-
   <body>
     <div class="container">
       <div class="categories">
         <div class="categories-title">Categories</div>
         <div class="categories-list">
-          <a href="#" class="category">All</a>
+          <a href="/<%= metadata.categoryEndpoint %>" class="category">All</a>
           <% categories.forEach(category => { %>
-          <a href="#" class="category"><%= category.name %></a>
+          <a
+            href="/<%= metadata.categoryEndpoint %>/<%= category.id %>"
+            class="category"
+            ><%= category.name %></a
+          >
           <% }); %>
         </div>
         <a href="/admin/index" class="admin-button">Admin Dashboard</a>

@@ -36,6 +36,7 @@ app.use(
   "/public/audio",
   express.static(path.join(__dirname, "public", "audio"))
 );
+app.use("/public/JS", express.static(path.join(__dirname, "public", "JS")));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

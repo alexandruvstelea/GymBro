@@ -1,15 +1,26 @@
 import Plan from "../models/Plan.js";
+import Workout from "../models/Workout.js";
 import workoutController from "./workoutController.js";
 
 const planController = {};
 
 planController.create = async (req, res) => {
   try {
+    const workoutsIds = req.body.workouts;
+    const workouts = await Workout.find({ _id: { $in: workoutsIds } });
+    const totalDuration = workouts.reduce(
+      (sum, workout) => sum + workout.duration,
+      0
+    );
+    const averageDifficulty = Math.ceil(
+      workouts.reduce((sum, workout) => sum + workout.difficulty, 0) /
+        workouts.length
+    );
     const new_plan = new Plan({
       name: req.body.name,
       description: req.body.description,
-      difficulty: req.body.difficulty,
-      duration: req.body.duration,
+      difficulty: averageDifficulty,
+      duration: totalDuration,
       category: req.body.category_id,
       workouts: req.body.workouts,
     });
@@ -38,13 +49,12 @@ planController.readById = async (id) => {
   }
 };
 
-planController.readByCategory = async (req, res) => {
+planController.readByCategory = async (id) => {
   try {
-    let id = req.params.categoryId;
-    const plan = await Plan.find({ category: id }).exec();
-    res.status(200).json(plan);
+    const plans = await Plan.find({ category: id }).exec();
+    return plans;
   } catch (error) {
-    res.status(500).json({ error: `An error has occurred: ${error.message}` });
+    throw new Error(`An error has occurred: ${error.message}`);
   }
 };
 

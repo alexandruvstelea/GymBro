@@ -43,6 +43,45 @@ renderUser.exercises = async (req, res) => {
     button: "View Exercise",
     endpoint: "exercise",
     image: "exercise",
+    categoryEndpoint: "exercises",
+  };
+  let entities = [];
+  if (exercises.length === 0) {
+    entities.push({
+      title: "No Exercises",
+      attribute: "No exercises available",
+      id: null,
+    });
+    metadata.button = "Not available";
+    metadata.endpoint = "exercises";
+  } else {
+    const formattedExercises = await Promise.all(
+      exercises.map(async (exercise) => {
+        const formattedDifficulty = await formatter.formatDifficulty(
+          exercise.difficulty
+        );
+        return {
+          title: exercise.name,
+          attribute: formattedDifficulty,
+          id: exercise.id,
+        };
+      })
+    );
+    entities = formattedExercises;
+  }
+  res.render("explorer", { entities, metadata, categories });
+};
+
+renderUser.exercisesByCategory = async (req, res) => {
+  let id = req.params.categoryId;
+  const exercises = await exerciseController.readByCategory(id);
+  const categories = await categoryController.readByEntity("exercises");
+  const metadata = {
+    title: "Exercises",
+    button: "View Exercise",
+    endpoint: "exercise",
+    image: "exercise",
+    categoryEndpoint: "exercises",
   };
   let entities = [];
   if (exercises.length === 0) {
@@ -79,6 +118,45 @@ renderUser.workouts = async (req, res) => {
     button: "View Workout",
     endpoint: "workout",
     image: "workout",
+    categoryEndpoint: "workouts",
+  };
+  let entities = [];
+  if (workouts.length === 0) {
+    entities.push({
+      title: "No Workouts",
+      attribute: "No workouts available",
+      id: null,
+    });
+    metadata.button = "Not available";
+    metadata.endpoint = "workouts";
+  } else {
+    const formattedWorkouts = await Promise.all(
+      workouts.map(async (workout) => {
+        const formattedDifficulty = await formatter.formatDifficulty(
+          workout.difficulty
+        );
+        return {
+          title: workout.name,
+          attribute: formattedDifficulty,
+          id: workout.id,
+        };
+      })
+    );
+    entities = formattedWorkouts;
+  }
+  res.render("explorer", { entities, metadata, categories });
+};
+
+renderUser.workoutsByCategory = async (req, res) => {
+  let id = req.params.categoryId;
+  const workouts = await workoutController.readByCategory(id);
+  const categories = await categoryController.readByEntity("workouts");
+  const metadata = {
+    title: "Workouts",
+    button: "View Workout",
+    endpoint: "workout",
+    image: "workout",
+    categoryEndpoint: "workouts",
   };
   let entities = [];
   if (workouts.length === 0) {
@@ -115,6 +193,45 @@ renderUser.plans = async (req, res) => {
     button: "View Plan",
     endpoint: "plan",
     image: "plan",
+    categoryEndpoint: "plans",
+  };
+  let entities = [];
+  if (plans.length === 0) {
+    entities.push({
+      title: "No Plans",
+      attribute: "No plans available",
+      id: null,
+    });
+    metadata.button = "Not available";
+    metadata.endpoint = "plans";
+  } else {
+    const formattedPlans = await Promise.all(
+      plans.map(async (plan) => {
+        const formattedDifficulty = await formatter.formatDifficulty(
+          plan.difficulty
+        );
+        return {
+          title: plan.name,
+          attribute: formattedDifficulty,
+          id: plan.id,
+        };
+      })
+    );
+    entities = formattedPlans;
+  }
+  res.render("explorer", { entities, metadata, categories });
+};
+
+renderUser.plansByCategory = async (req, res) => {
+  let id = req.params.categoryId;
+  const plans = await planController.readByCategory(id);
+  const categories = await categoryController.readByEntity("plans");
+  const metadata = {
+    title: "Plans",
+    button: "View Plan",
+    endpoint: "plan",
+    image: "plan",
+    categoryEndpoint: "plans",
   };
   let entities = [];
   if (plans.length === 0) {
@@ -157,7 +274,7 @@ renderUser.new = async (req, res) => {
         : "No plan description",
       image: "plan",
       date_added: latestPlan.length
-        ? latestPlan[0].date_added
+        ? await formatter.formatDate(latestPlan[0].date_added)
         : "No Date Available",
     },
     {
@@ -169,7 +286,7 @@ renderUser.new = async (req, res) => {
         : "No workout description",
       image: "workout",
       date_added: latestWorkout.length
-        ? latestWorkout[0].date_added
+        ? await formatter.formatDate(latestWorkout[0].date_added)
         : "No Date Available",
     },
     {
@@ -181,7 +298,7 @@ renderUser.new = async (req, res) => {
         : "No exercise description",
       image: "exercise",
       date_added: latestExercise.length
-        ? latestExercise[0].date_added
+        ? await formatter.formatDate(latestExercise[0].date_added)
         : "No Date Available",
     },
   ];
@@ -259,4 +376,7 @@ renderUser.admin = (req, res) => {
   res.render("adminIndex");
 };
 
+renderUser.wip = (req, res) => {
+  res.render("wip");
+};
 export default renderUser;

@@ -62,156 +62,314 @@ html {
   justify-content: space-around;
   margin: 20px;
   margin-top: 2%;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .button-landing {
-    background-color: transparent;
-    border: 3px solid black;
-    box-sizing: border-box;
-    color: #000;
-    cursor: pointer;
-    display: inline-block;
-    letter-spacing: 0.05em;
-    margin-top: 24px;
-    outline: none;
-    overflow: visible;
-    padding: 1.25em 2em;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    text-transform: none;
-    transition: all 0.3s ease-in-out;
-    user-select: none;
-    font-size: 20px;
-  }
-  
-  .button-landing::before {
-    content: " ";
-    width: 1.5625rem;
-    height: 2px;
-    background: #000;
-    top: 50%;
-    left: 1.5em;
-    position: absolute;
-    transform: translateY(-50%);
-    transform-origin: center;
-    transition: background 0.3s linear, width 0.3s linear;
-  }
-  
-  .button-landing .text {
-    font-size: 1.25em;
-    line-height: 1.33333em;
-    padding-left: 2em;
-    display: block;
-    text-align: left;
-    transition: all 0.5s ease-in-out;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #000;
-  }
-  
-  .button-landing .top-key {
-    height: 2px;
-    width: 1.5625rem;
-    top: -2px;
-    left: 0.625rem;
-    position: absolute;
-    background: black;
-    transition: width 0.5s ease-out, left 0.3s ease-out;
-  }
-  
-  .button-landing .bottom-key-1 {
-    height: 2px;
-    width: 1.5625rem;
-    right: 1.875rem;
-    bottom: -2px;
-    position: absolute;
-    background: black;
-    transition: width 0.5s ease-out, right 0.3s ease-out;
-  }
-  
-  .button-landing .bottom-key-2 {
-    height: 2px;
-    width: 0.625rem;
-    right: 0.625rem;
-    bottom: -2px;
-    position: absolute;
-    background: black;
-    transition: width 0.5s ease-out, right 0.3s ease-out;
-  }
-  
-  .button-landing:hover {
-    color: #000;
-    background: #780376;
-  }
-  
-  .button-landing:hover::before {
-    width: 0.9375rem;
-    background: #000;
-  }
-  
-  .button-landing:hover .text {
-    color: #000;
-    padding-left: 1.5em;
-  }
-  
-  .button-landing:hover .top-key {
-    left: -2px;
-    width: 0px;
-  }
-  
-  .button-landing:hover .bottom-key-1,
-  .button-landing:hover .bottom-key-2 {
-    right: 0;
-    width: 0;
-  }
-  
-  .entity-title {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 20px 0;
-    text-align: center;
-  }
+  background-color: transparent;
+  border: 3px solid black;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 0.05em;
+  margin-top: 24px;
+  outline: none;
+  overflow: visible;
+  padding: 1.25em 2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 20px;
+}
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 5px;
-  }
-  
-  thead th {
-    background-color: #780376;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center; 
-    border: 1px solid #780376; 
-  }
-  
-  tbody td {
-    padding: 10px;
-    text-align: center; 
-    border: 1px solid #780376; 
-  }
+.button-landing::before {
+  content: " ";
+  width: 1.5625rem;
+  height: 2px;
+  background: #000;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
 
-  tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
+.button-landing .text {
+  font-size: 1.25em;
+  line-height: 1.33333em;
+  padding-left: 2em;
+  display: block;
+  text-align: left;
+  transition: all 0.5s ease-in-out;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
 
-  .footer {
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      45deg,
-      rgba(2, 0, 36, 1) 0%,
-      rgba(112, 9, 121, 1) 45%,
-      rgba(0, 212, 255, 1) 100%
-    );
-    color: white;
-    padding: 5px;
-    text-align: center;
-    font-weight: bolder;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-  }
+.button-landing .top-key {
+  height: 2px;
+  width: 1.5625rem;
+  top: -2px;
+  left: 0.625rem;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.button-landing .bottom-key-1 {
+  height: 2px;
+  width: 1.5625rem;
+  right: 1.875rem;
+  bottom: -2px;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.button-landing .bottom-key-2 {
+  height: 2px;
+  width: 0.625rem;
+  right: 0.625rem;
+  bottom: -2px;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.button-landing:hover {
+  color: #000;
+  background: #780376;
+}
+
+.button-landing:hover::before {
+  width: 0.9375rem;
+  background: #000;
+}
+
+.button-landing:hover .text {
+  color: #000;
+  padding-left: 1.5em;
+}
+
+.button-landing:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.button-landing:hover .bottom-key-1,
+.button-landing:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
+}
+
+.entity-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+
+thead th {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #780376;
+}
+
+thead th:nth-child(even) {
+  background: linear-gradient(
+    45deg,
+    rgba(0, 212, 255, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(2, 0, 36, 1) 100%
+  );
+}
+
+tbody td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #780376;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.edit-button {
+  background-color: #4287f5;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.edit-button:hover {
+  background-color: #3072d6;
+  transform: scale(1.1);
+}
+
+.delete-button {
+  background-color: #f54242;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #d63030;
+  transform: scale(1.1);
+}
+
+.footer {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bolder;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  margin-top: 8%;
+}
+
+.button-landing {
+  background-color: transparent;
+  border: 3px solid black;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 0.05em;
+  margin-top: 24px;
+  outline: none;
+  overflow: visible;
+  padding: 1.25em 2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 20px;
+}
+
+.button-landing::before {
+  content: " ";
+  width: 1.5625rem;
+  height: 2px;
+  background: #000;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.button-landing .text {
+  font-size: 1.25em;
+  line-height: 1.33333em;
+  padding-left: 2em;
+  display: block;
+  text-align: left;
+  transition: all 0.5s ease-in-out;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
+
+.button-landing .top-key {
+  height: 2px;
+  width: 1.5625rem;
+  top: -2px;
+  left: 0.625rem;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.button-landing .bottom-key-1 {
+  height: 2px;
+  width: 1.5625rem;
+  right: 1.875rem;
+  bottom: -2px;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.button-landing .bottom-key-2 {
+  height: 2px;
+  width: 0.625rem;
+  right: 0.625rem;
+  bottom: -2px;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.button-landing:hover {
+  color: #000;
+  background: #780376;
+}
+
+.button-landing:hover::before {
+  width: 0.9375rem;
+  background: #000;
+}
+
+.button-landing:hover .text {
+  color: #000;
+  padding-left: 1.5em;
+}
+
+.button-landing:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.button-landing:hover .bottom-key-1,
+.button-landing:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
+}
+
+table a {
+  text-decoration: none;
+  font-size: 13px;
+}

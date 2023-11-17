@@ -1,0 +1,154 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: azure;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-radius: 15px 15px 15px 15px;
+  margin-top: 1%;
+  margin-left: 15%;
+  margin-right: 15%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.navbar:hover {
+  transform: scale(1.05);
+}
+
+.navbar a {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.navbar a.logo {
+  background-color: transparent;
+  margin-right: auto;
+}
+
+.navbar a:not(.logo):hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar a.active {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+
+.navbar-right {
+  display: flex;
+}
+
+.footer {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(112, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bolder;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: azure;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  width: 70%;
+  max-width: 600px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+form label,
+form input,
+form textarea,
+form select {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #780376;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+form textarea {
+  max-width: 100%;
+  resize: vertical;
+  max-height: 200px;
+}
+
+input[type="submit"] {
+  background-color: #780376;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #5b025b;
+}
+
+textarea {
+  resize: none;
+  max-width: 100%;
+  max-height: 200px;
+}
